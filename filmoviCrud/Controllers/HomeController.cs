@@ -1,4 +1,4 @@
-using filmoviCrud.Models;
+using filmoviCrud.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

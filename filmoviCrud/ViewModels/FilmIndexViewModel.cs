@@ -1,4 +1,5 @@
-namespace filmoviCrud.Models
+using filmoviCrud.Models;
+namespace filmoviCrud.ViewModels
 {
     public class FilmIndexViewModel
     {
