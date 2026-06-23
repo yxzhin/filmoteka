@@ -1,6 +1,6 @@
-using System.Diagnostics;
 using filmoviCrud.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace filmoviCrud.Controllers
 {

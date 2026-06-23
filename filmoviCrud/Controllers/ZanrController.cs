@@ -21,14 +21,15 @@ namespace filmoviCrud.Controllers
 
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null) return NotFound();
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-            var zanr = await _context.Zanrovi
+            Zanr? zanr = await _context.Zanrovi
                 .FirstOrDefaultAsync(m => m.Id == id);
 
-            if (zanr == null) return NotFound();
-
-            return View(zanr);
+            return zanr == null ? NotFound() : View(zanr);
         }
 
         public IActionResult Create()
@@ -40,39 +41,53 @@ namespace filmoviCrud.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Naziv")] Zanr zanr)
         {
-            if (!ModelState.IsValid) return View(zanr);
+            if (!ModelState.IsValid)
+            {
+                return View(zanr);
+            }
 
-            _context.Add(zanr);
-            await _context.SaveChangesAsync();
+            _ = _context.Add(zanr);
+            _ = await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null) return NotFound();
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-            var zanr = await _context.Zanrovi.FindAsync(id);
-            if (zanr == null) return NotFound();
-
-            return View(zanr);
+            Zanr? zanr = await _context.Zanrovi.FindAsync(id);
+            return zanr == null ? NotFound() : View(zanr);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Naziv")] Zanr zanr)
         {
-            if (id != zanr.Id) return NotFound();
+            if (id != zanr.Id)
+            {
+                return NotFound();
+            }
 
-            if (!ModelState.IsValid) return View(zanr);
+            if (!ModelState.IsValid)
+            {
+                return View(zanr);
+            }
 
             try
             {
-                _context.Update(zanr);
-                await _context.SaveChangesAsync();
+                _ = _context.Update(zanr);
+                _ = await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!await ZanrExists(zanr.Id)) return NotFound();
+                if (!await ZanrExists(zanr.Id))
+                {
+                    return NotFound();
+                }
+
                 throw;
             }
 
@@ -81,25 +96,26 @@ namespace filmoviCrud.Controllers
 
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null) return NotFound();
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-            var zanr = await _context.Zanrovi
+            Zanr? zanr = await _context.Zanrovi
                 .FirstOrDefaultAsync(m => m.Id == id);
 
-            if (zanr == null) return NotFound();
-
-            return View(zanr);
+            return zanr == null ? NotFound() : View(zanr);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var zanr = await _context.Zanrovi.FindAsync(id);
+            Zanr? zanr = await _context.Zanrovi.FindAsync(id);
             if (zanr != null)
             {
-                _context.Zanrovi.Remove(zanr);
-                await _context.SaveChangesAsync();
+                _ = _context.Zanrovi.Remove(zanr);
+                _ = await _context.SaveChangesAsync();
             }
 
             return RedirectToAction(nameof(Index));

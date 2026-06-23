@@ -1,4 +1,4 @@
-﻿namespace filmoviCrud.Models
+namespace filmoviCrud.Models
 {
     public class Zanr
     {
