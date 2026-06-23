@@ -1,8 +1,15 @@
-﻿namespace filmoviCrud.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace filmoviCrud.ViewModels
 {
     public class LoginViewModel
     {
-        public required string Email { get; set; }
-        public required string Password { get; set; }
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; } = "";
+
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; } = "";
     }
 }
