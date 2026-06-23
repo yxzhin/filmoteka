@@ -12,6 +12,7 @@ namespace filmoviCrud.Data
         public DbSet<Film> Filmovi { get; set; }
         public DbSet<Zanr> Zanrovi { get; set; }
         public DbSet<Reziser> Reziseri { get; set; }
+        public DbSet<Korisnik> Korisnici { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
