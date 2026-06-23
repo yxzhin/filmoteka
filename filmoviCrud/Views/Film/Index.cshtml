@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Film>
+
+@{
+    ViewData["Title"] = "Filmovi";
+}
+
+<h1>Filmovi</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">
+        Dodaj film
+    </a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Naziv</th>
+            <th>Zanr</th>
+            <th>Godina</th>
+            <th>Reziseri</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var film in Model)
+        {
+            <tr>
+                <td>@film.Naziv</td>
+                <td>@film.Zanr.Naziv</td>
+                <td>@film.GodinaIzdanja</td>
+                <td>
+                    @string.Join(", ", film.Reziseri.Select(r => r.Naziv))
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@film.Id">Detalji</a> |
+                    <a asp-action="Edit" asp-route-id="@film.Id">Izmeni</a> |
+                    <a asp-action="Delete" asp-route-id="@film.Id">Obrisi</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

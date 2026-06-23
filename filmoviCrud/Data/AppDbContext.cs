@@ -1,0 +1,30 @@
+﻿using Microsoft.EntityFrameworkCore;
+using filmoviCrud.Models;
+
+namespace filmoviCrud.Data
+{
+    public class AppDbContext : DbContext
+    {
+        public AppDbContext(DbContextOptions<AppDbContext> options)
+            : base(options)
+        {
+        }
+        public DbSet<Film> Filmovi { get; set; }
+        public DbSet<Zanr> Zanrovi { get; set; }
+        public DbSet<Reziser> Reziseri { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Film>()
+                .HasOne(f => f.Zanr)
+                .WithMany(z => z.Filmovi)
+                .HasForeignKey(f => f.ZanrId);
+
+            modelBuilder.Entity<Film>()
+                .HasOne(f => f.Zanr)
+                .WithMany(z => z.Filmovi)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
+
+    }
+}

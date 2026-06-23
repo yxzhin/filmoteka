@@ -1,0 +1,65 @@
+﻿@model FilmFormViewModel
+
+@{
+    ViewData["Title"] = "Dodavanje filma";
+}
+
+<h1>Dodavanje filma</h1>
+
+<form asp-action="Create">
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Naziv" class="form-label"></label>
+        <input asp-for="Naziv" class="form-control" />
+        <span asp-validation-for="Naziv" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="GodinaIzdanja" class="form-label"></label>
+        <input asp-for="GodinaIzdanja" class="form-control" />
+        <span asp-validation-for="GodinaIzdanja" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ZanrId" class="form-label">
+            Zanr
+        </label>
+
+        <select asp-for="ZanrId"
+                asp-items="ViewBag.Zanrovi"
+                class="form-select">
+            <option value="">Izaberite zanr</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">
+            Reziseri
+        </label>
+
+        <select asp-for="ReziserIds"
+                asp-items="ViewBag.Reziseri"
+                multiple
+                class="form-select">
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Sacuvaj
+    </button>
+
+    <a asp-action="Index"
+       class="btn btn-secondary">
+        Nazad
+    </a>
+
+</form>
+
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

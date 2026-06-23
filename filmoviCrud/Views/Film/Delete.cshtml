@@ -1,0 +1,50 @@
+﻿@model Film
+
+@{
+    ViewData["Title"] = "Brisanje filma";
+}
+
+<h1>Brisanje filma</h1>
+
+<h3>
+    Da li ste sigurni da zelite da obrisete ovaj film?
+</h3>
+
+<dl class="row">
+
+    <dt class="col-sm-3">
+        Naziv
+    </dt>
+    <dd class="col-sm-9">
+        @Model.Naziv
+    </dd>
+
+    <dt class="col-sm-3">
+        Zanr
+    </dt>
+    <dd class="col-sm-9">
+        @Model.Zanr.Naziv
+    </dd>
+
+    <dt class="col-sm-3">
+        Godina izdanja
+    </dt>
+    <dd class="col-sm-9">
+        @Model.GodinaIzdanja
+    </dd>
+
+</dl>
+
+<form asp-action="Delete">
+    <input asp-for="Id" type="hidden" />
+
+    <button type="submit"
+            class="btn btn-danger">
+        Obrisi
+    </button>
+
+    <a asp-action="Index"
+       class="btn btn-secondary">
+        Otkazi
+    </a>
+</form>

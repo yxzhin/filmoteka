@@ -1,0 +1,50 @@
+﻿@model Film
+
+@{
+    ViewData["Title"] = "Detalji filma";
+}
+
+<h1>Detalji filma</h1>
+
+<dl class="row">
+
+    <dt class="col-sm-3">
+        Naziv
+    </dt>
+    <dd class="col-sm-9">
+        @Model.Naziv
+    </dd>
+
+    <dt class="col-sm-3">
+        Žanr
+    </dt>
+    <dd class="col-sm-9">
+        @Model.Zanr.Naziv
+    </dd>
+
+    <dt class="col-sm-3">
+        Godina izdanja
+    </dt>
+    <dd class="col-sm-9">
+        @Model.GodinaIzdanja
+    </dd>
+
+    <dt class="col-sm-3">
+        Reziseri
+    </dt>
+    <dd class="col-sm-9">
+        @string.Join(", ", Model.Reziseri.Select(r => r.Naziv))
+    </dd>
+
+</dl>
+
+<a asp-action="Edit"
+   asp-route-id="@Model.Id"
+   class="btn btn-primary">
+    Izmeni
+</a>
+
+<a asp-action="Index"
+   class="btn btn-secondary">
+    Nazad
+</a>

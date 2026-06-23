@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Reziser>
+
+@{
+    ViewData["Title"] = "Reziseri";
+}
+
+<h1>Režiseri</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">
+        Dodaj rezisera
+    </a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Naziv</th>
+            <th>Uzrast</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reziser in Model)
+        {
+            <tr>
+                <td>@reziser.Id</td>
+                <td>@reziser.Naziv</td>
+                <td>@reziser.Uzrast</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@reziser.Id">Detalji</a> |
+                    <a asp-action="Edit" asp-route-id="@reziser.Id">Izmeni</a> |
+                    <a asp-action="Delete" asp-route-id="@reziser.Id">Obrisi</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

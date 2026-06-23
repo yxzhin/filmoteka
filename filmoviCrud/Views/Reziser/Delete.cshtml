@@ -1,0 +1,35 @@
+﻿@model Reziser
+
+@{
+    ViewData["Title"] = "Brisanje rezisera";
+}
+
+<h1>Brisanje rezisera</h1>
+
+<h3>Da li ste sigurni da zelite da obrisete ovog rezisera?</h3>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">ID</dt>
+        <dd class="col-sm-9">@Model.Id</dd>
+
+        <dt class="col-sm-3">Naziv</dt>
+        <dd class="col-sm-9">@Model.Naziv</dd>
+
+        <dt class="col-sm-3">Uzrast</dt>
+        <dd class="col-sm-9">@Model.Uzrast</dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+
+        <button type="submit" class="btn btn-danger">
+            Obrisi
+        </button>
+
+        <a asp-action="Index"
+           class="btn btn-secondary">
+            Otkazi
+        </a>
+    </form>
+</div>

@@ -1,0 +1,33 @@
+﻿@model Zanr
+
+@{
+    ViewData["Title"] = "Izmena zanra";
+}
+
+<h1>Izmena zanra</h1>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="Id" />
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Naziv" class="form-label"></label>
+        <input asp-for="Naziv" class="form-control" />
+        <span asp-validation-for="Naziv" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Sacuvaj izmene
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Nazad
+    </a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,37 @@
+﻿@model Zanr
+
+@{
+    ViewData["Title"] = "Detalji zanra";
+}
+
+<h1>Detalji zanra</h1>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            ID
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Id
+        </dd>
+
+        <dt class="col-sm-2">
+            Naziv
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Naziv
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id"
+       class="btn btn-primary">
+        Izmeni
+    </a>
+
+    <a asp-action="Index"
+       class="btn btn-secondary">
+        Nazad
+    </a>
+</div>
