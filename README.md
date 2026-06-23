@@ -29,3 +29,5 @@ docker compose up -d --build
 - ASP.NET MVC: <http://localhost:8080>
 - PostgreSQL:   <http://localhost:5432>
 - pgAdmin:      <http://localhost:5050>
+
+pgAdmin default email/password: <admin@admin.com>/admin
