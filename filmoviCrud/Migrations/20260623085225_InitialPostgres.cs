@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace filmoviCrud.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialPostgres : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,10 +15,10 @@ namespace filmoviCrud.Migrations
                 name: "Reziseri",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Naziv = table.Column<string>(type: "TEXT", nullable: false),
-                    Uzrast = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Naziv = table.Column<string>(type: "text", nullable: false),
+                    Uzrast = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,9 +29,9 @@ namespace filmoviCrud.Migrations
                 name: "Zanrovi",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Naziv = table.Column<string>(type: "TEXT", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Naziv = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -41,11 +42,11 @@ namespace filmoviCrud.Migrations
                 name: "Filmovi",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Naziv = table.Column<string>(type: "TEXT", nullable: false),
-                    ZanrId = table.Column<int>(type: "INTEGER", nullable: false),
-                    GodinaIzdanja = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Naziv = table.Column<string>(type: "text", nullable: false),
+                    ZanrId = table.Column<int>(type: "integer", nullable: false),
+                    GodinaIzdanja = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -59,26 +60,24 @@ namespace filmoviCrud.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ReziseriFilmova",
+                name: "FilmReziser",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    FilmId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ReziserId = table.Column<int>(type: "INTEGER", nullable: false)
+                    FilmoviId = table.Column<int>(type: "integer", nullable: false),
+                    ReziseriId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ReziseriFilmova", x => x.Id);
+                    table.PrimaryKey("PK_FilmReziser", x => new { x.FilmoviId, x.ReziseriId });
                     table.ForeignKey(
-                        name: "FK_ReziseriFilmova_Filmovi_FilmId",
-                        column: x => x.FilmId,
+                        name: "FK_FilmReziser_Filmovi_FilmoviId",
+                        column: x => x.FilmoviId,
                         principalTable: "Filmovi",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ReziseriFilmova_Reziseri_ReziserId",
-                        column: x => x.ReziserId,
+                        name: "FK_FilmReziser_Reziseri_ReziseriId",
+                        column: x => x.ReziseriId,
                         principalTable: "Reziseri",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -90,21 +89,16 @@ namespace filmoviCrud.Migrations
                 column: "ZanrId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ReziseriFilmova_FilmId",
-                table: "ReziseriFilmova",
-                column: "FilmId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ReziseriFilmova_ReziserId",
-                table: "ReziseriFilmova",
-                column: "ReziserId");
+                name: "IX_FilmReziser_ReziseriId",
+                table: "FilmReziser",
+                column: "ReziseriId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ReziseriFilmova");
+                name: "FilmReziser");
 
             migrationBuilder.DropTable(
                 name: "Filmovi");

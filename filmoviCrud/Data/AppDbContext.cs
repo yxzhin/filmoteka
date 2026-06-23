@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using filmoviCrud.Models;
+﻿using filmoviCrud.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace filmoviCrud.Data
 {
@@ -15,12 +15,12 @@ namespace filmoviCrud.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Film>()
+            _ = modelBuilder.Entity<Film>()
                 .HasOne(f => f.Zanr)
                 .WithMany(z => z.Filmovi)
                 .HasForeignKey(f => f.ZanrId);
 
-            modelBuilder.Entity<Film>()
+            _ = modelBuilder.Entity<Film>()
                 .HasOne(f => f.Zanr)
                 .WithMany(z => z.Filmovi)
                 .OnDelete(DeleteBehavior.Cascade);

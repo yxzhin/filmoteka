@@ -12,9 +12,9 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["filmoviCrud/filmoviCrud.csproj", "filmoviCrud/"]
+COPY ["filmoviCrud.csproj", "filmoviCrud/"]
 RUN dotnet restore "./filmoviCrud/filmoviCrud.csproj"
-COPY . .
+COPY . ./filmoviCrud
 WORKDIR "/src/filmoviCrud"
 RUN dotnet build "./filmoviCrud.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
