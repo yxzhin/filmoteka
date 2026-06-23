@@ -20,34 +20,38 @@ namespace filmoviCrud.Controllers
         {
             const int pageSize = 10;
 
-            var totalItems = await _context.Filmovi.CountAsync();
+            int totalItems = await _context.Filmovi.CountAsync();
 
-            var filmovi = await _context.Filmovi
-                .Include(f => f.Zanr)
-                .Include(f => f.Reziseri)
-                .OrderBy(f => f.Naziv)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
+            FilmIndexViewModel model = new()
+            {
+                Filmovi = await _context.Filmovi
+                    .Include(f => f.Zanr)
+                    .Include(f => f.Reziseri)
+                    .OrderBy(f => f.Naziv)
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToListAsync(),
 
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
+                CurrentPage = page,
+                TotalPages = (int)Math.Ceiling(totalItems / (double)pageSize)
+            };
 
-            return View(filmovi);
+            return View(model);
         }
 
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null) return NotFound();
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-            var film = await _context.Filmovi
+            Film? film = await _context.Filmovi
                 .Include(f => f.Zanr)
                 .Include(f => f.Reziseri)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
-            if (film == null) return NotFound();
-
-            return View(film);
+            return film == null ? NotFound() : View(film);
         }
 
         public async Task<IActionResult> Create()
@@ -70,13 +74,13 @@ namespace filmoviCrud.Controllers
 
             Zanr zanr = await _context.Zanrovi.FirstAsync(z => z.Id == model.ZanrId);
 
-            var film = new Film
+            Film film = new()
             {
                 Naziv = model.Naziv,
                 ZanrId = model.ZanrId,
                 Zanr = zanr,
                 GodinaIzdanja = model.GodinaIzdanja,
-                Reziseri = new List<Reziser>()
+                Reziseri = []
             };
 
             if (model.ReziserIds.Any())
@@ -86,23 +90,29 @@ namespace filmoviCrud.Controllers
                     .ToListAsync();
             }
 
-            _context.Filmovi.Add(film);
-            await _context.SaveChangesAsync();
+            _ = _context.Filmovi.Add(film);
+            _ = await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null) return NotFound();
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-            var film = await _context.Filmovi
+            Film? film = await _context.Filmovi
                 .Include(f => f.Reziseri)
                 .FirstOrDefaultAsync(f => f.Id == id);
 
-            if (film == null) return NotFound();
+            if (film == null)
+            {
+                return NotFound();
+            }
 
-            var model = new FilmFormViewModel
+            FilmFormViewModel model = new()
             {
                 Id = film.Id,
                 Naziv = film.Naziv,
@@ -121,7 +131,10 @@ namespace filmoviCrud.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, FilmFormViewModel model)
         {
-            if (id != model.Id) return NotFound();
+            if (id != model.Id)
+            {
+                return NotFound();
+            }
 
             if (!ModelState.IsValid)
             {
@@ -130,11 +143,14 @@ namespace filmoviCrud.Controllers
                 return View(model);
             }
 
-            var film = await _context.Filmovi
+            Film? film = await _context.Filmovi
                 .Include(f => f.Reziseri)
                 .FirstOrDefaultAsync(f => f.Id == id);
 
-            if (film == null) return NotFound();
+            if (film == null)
+            {
+                return NotFound();
+            }
 
             film.Naziv = model.Naziv;
             film.ZanrId = model.ZanrId;
@@ -142,42 +158,43 @@ namespace filmoviCrud.Controllers
 
             film.Reziseri.Clear();
 
-            var noviReziseri = await _context.Reziseri
+            List<Reziser> noviReziseri = await _context.Reziseri
                 .Where(r => model.ReziserIds.Contains(r.Id))
                 .ToListAsync();
 
-            foreach (var reziser in noviReziseri)
+            foreach (Reziser? reziser in noviReziseri)
             {
                 film.Reziseri.Add(reziser);
             }
 
-            await _context.SaveChangesAsync();
+            _ = await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null) return NotFound();
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-            var film = await _context.Filmovi
+            Film? film = await _context.Filmovi
                 .Include(f => f.Zanr)
                 .Include(f => f.Reziseri)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
-            if (film == null) return NotFound();
-
-            return View(film);
+            return film == null ? NotFound() : View(film);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var film = await _context.Filmovi.FindAsync(id);
+            Film? film = await _context.Filmovi.FindAsync(id);
             if (film != null)
             {
-                _context.Filmovi.Remove(film);
-                await _context.SaveChangesAsync();
+                _ = _context.Filmovi.Remove(film);
+                _ = await _context.SaveChangesAsync();
             }
 
             return RedirectToAction(nameof(Index));

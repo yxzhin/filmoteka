@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Film>
+﻿@model FilmIndexViewModel
 
 @{
     ViewData["Title"] = "Filmovi";
@@ -23,7 +23,8 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var film in Model)
+
+        @foreach (var film in Model.Filmovi)
         {
             <tr>
                 <td>@film.Naziv</td>
@@ -41,3 +42,47 @@
         }
     </tbody>
 </table>
+
+@{
+    int currentPage = Model.CurrentPage;
+    int totalPages = Model.TotalPages;
+}
+
+<nav>
+    <ul class="pagination">
+
+        @if (currentPage > 1)
+        {
+            <li class="page-item">
+                <a class="page-link"
+                   asp-action="Index"
+                   asp-route-page="@(currentPage - 1)">
+                    Prethodna
+                </a>
+            </li>
+        }
+
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == currentPage ? "active" : "")">
+                <a class="page-link"
+                   asp-action="Index"
+                   asp-route-page="@i">
+                    @i
+                </a>
+            </li>
+        }
+
+        @if (currentPage < totalPages)
+        {
+            <li class="page-item">
+                <a class="page-link"
+                   asp-action="Index"
+                   asp-route-page="@(currentPage + 1)">
+                    Sledeca
+                </a>
+            </li>
+        }
+
+    </ul>
+</nav>
