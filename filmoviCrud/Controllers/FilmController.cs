@@ -1,6 +1,7 @@
 ﻿using filmoviCrud.Data;
 using filmoviCrud.Models;
 using filmoviCrud.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace filmoviCrud.Controllers
 {
 
+    [Authorize]
     public class FilmController : Controller
     {
         private readonly AppDbContext _context;
@@ -55,6 +57,7 @@ namespace filmoviCrud.Controllers
             return film == null ? NotFound() : View(film);
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Create()
         {
             ViewBag.Zanrovi = new SelectList(await _context.Zanrovi.ToListAsync(), "Id", "Naziv");
@@ -64,6 +67,7 @@ namespace filmoviCrud.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Create(FilmFormViewModel model)
         {
             if (!ModelState.IsValid)
@@ -97,6 +101,7 @@ namespace filmoviCrud.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -130,6 +135,7 @@ namespace filmoviCrud.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int id, FilmFormViewModel model)
         {
             if (id != model.Id)
@@ -172,6 +178,7 @@ namespace filmoviCrud.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -189,6 +196,7 @@ namespace filmoviCrud.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             Film? film = await _context.Filmovi.FindAsync(id);

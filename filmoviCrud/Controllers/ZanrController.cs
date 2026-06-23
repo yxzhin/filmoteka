@@ -1,10 +1,13 @@
 ﻿using filmoviCrud.Data;
 using filmoviCrud.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace filmoviCrud.Controllers
 {
+
+    [Authorize]
     public class ZanrController : Controller
     {
         private readonly AppDbContext _context;
@@ -32,6 +35,7 @@ namespace filmoviCrud.Controllers
             return zanr == null ? NotFound() : View(zanr);
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult Create()
         {
             return View();
@@ -39,6 +43,7 @@ namespace filmoviCrud.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Create([Bind("Id,Naziv")] Zanr zanr)
         {
             if (!ModelState.IsValid)
@@ -51,6 +56,7 @@ namespace filmoviCrud.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -64,6 +70,7 @@ namespace filmoviCrud.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Naziv")] Zanr zanr)
         {
             if (id != zanr.Id)
@@ -94,6 +101,7 @@ namespace filmoviCrud.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -109,6 +117,7 @@ namespace filmoviCrud.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             Zanr? zanr = await _context.Zanrovi.FindAsync(id);

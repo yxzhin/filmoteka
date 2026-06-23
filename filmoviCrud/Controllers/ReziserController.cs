@@ -1,11 +1,13 @@
 ﻿using filmoviCrud.Data;
 using filmoviCrud.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace filmoviCrud.Controllers
 {
 
+    [Authorize]
     public class ReziserController : Controller
     {
         private readonly AppDbContext _context;
@@ -40,6 +42,7 @@ namespace filmoviCrud.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Create([Bind("Id,Naziv,Uzrast")] Reziser reziser)
         {
             if (!ModelState.IsValid)
@@ -52,6 +55,7 @@ namespace filmoviCrud.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -65,6 +69,7 @@ namespace filmoviCrud.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Naziv,Uzrast")] Reziser reziser)
         {
             if (id != reziser.Id)
@@ -95,6 +100,7 @@ namespace filmoviCrud.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -110,6 +116,7 @@ namespace filmoviCrud.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             Reziser? reziser = await _context.Reziseri.FindAsync(id);
