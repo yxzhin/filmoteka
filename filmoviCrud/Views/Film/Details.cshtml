@@ -4,6 +4,10 @@
     ViewData["Title"] = "Detalji filma";
 }
 
+@{
+    bool isAdmin = User.IsInRole("admin");
+}
+
 <h1>Detalji filma</h1>
 
 <dl class="row">
@@ -38,11 +42,14 @@
 
 </dl>
 
-<a asp-action="Edit"
-   asp-route-id="@Model.Id"
-   class="btn btn-primary">
-    Izmeni
-</a>
+@if(isAdmin)
+{
+    <a asp-action="Edit"
+        asp-route-id="@Model.Id"
+        class="btn btn-primary">
+        Izmeni
+    </a>
+}
 
 <a asp-action="Index"
    class="btn btn-secondary">
