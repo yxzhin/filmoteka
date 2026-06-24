@@ -4,6 +4,10 @@
     ViewData["Title"] = "Izmena filma";
 }
 
+@{
+    bool isAdmin = User.IsInRole("admin");
+}
+
 <h1>Izmena filma</h1>
 
 <form asp-action="Edit">

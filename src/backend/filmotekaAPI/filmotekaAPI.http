@@ -1,0 +1,6 @@
+@filmotekaAPI_HostAddress = http://localhost:5006
+
+GET {{filmotekaAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
