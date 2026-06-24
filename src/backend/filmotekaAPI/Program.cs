@@ -1,4 +1,7 @@
 using filmotekaAPI.Data;
+using filmotekaAPI.Interfaces;
+using filmotekaAPI.Repositories;
+using filmotekaAPI.Services;
 using Microsoft.EntityFrameworkCore;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -15,6 +18,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IKorisnikRepository, KorisnikRepository>();
+builder.Services.AddScoped<IKorisnikService, KorisnikService>();
 
 WebApplication app = builder.Build();
 
