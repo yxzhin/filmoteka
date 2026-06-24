@@ -8,7 +8,12 @@ namespace filmotekaAPI.DTOs
 
         public static KorisnikServiceGetManyDTO Ok(List<Korisnik> korisnici, string message)
         {
-            return new() { Message = message, Success = true, Korisnici = korisnici };
+            return new()
+            {
+                Message = message,
+                Success = true,
+                Korisnici = korisnici
+            };
         }
     }
 }
