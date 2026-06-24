@@ -1,11 +1,12 @@
+using filmotekaAPI.Interfaces;
 using System.ComponentModel.DataAnnotations;
 
 namespace filmotekaAPI.Models
 {
-    public class Reziser
+    public class Reziser : IEntity
     {
         [Required]
-        public int Id { get; set; }
+        public int Id { get; init; }
 
         [Required]
         [MaxLength(73)]
