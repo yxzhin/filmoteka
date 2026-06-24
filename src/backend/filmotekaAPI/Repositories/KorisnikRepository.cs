@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace filmotekaAPI.Repositories
 {
-    public class KorisnikRepository(AppDbContext dbContext) : IRepository<Korisnik>
+    public class KorisnikRepository(AppDbContext dbContext) : IKorisnikRepository
     {
         private readonly AppDbContext _dbContext = dbContext;
 
