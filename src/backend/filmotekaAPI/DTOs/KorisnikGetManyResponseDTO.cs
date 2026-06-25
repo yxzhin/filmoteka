@@ -2,11 +2,11 @@ using filmotekaAPI.Models;
 
 namespace filmotekaAPI.DTOs
 {
-    public class KorisnikServiceGetManyDTO : BaseResponseDTO
+    public class KorisnikGetManyResponseDTO : BaseResponseDTO
     {
         public required List<Korisnik> Korisnici { get; init; }
 
-        public static KorisnikServiceGetManyDTO Ok(List<Korisnik> korisnici, string message)
+        public static KorisnikGetManyResponseDTO Ok(List<Korisnik> korisnici, string message)
         {
             return new()
             {

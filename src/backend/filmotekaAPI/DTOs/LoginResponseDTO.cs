@@ -1,11 +1,11 @@
 namespace filmotekaAPI.DTOs
 {
-    public class KorisnikServiceLoginDTO : BaseResponseDTO
+    public class LoginResponseDTO : BaseResponseDTO
     {
         public string? AccessToken { get; init; }
         public string? TokenType { get; init; }
 
-        public static KorisnikServiceLoginDTO Ok(
+        public static LoginResponseDTO Ok(
             string message,
             string accessToken,
             string tokenType
@@ -20,7 +20,7 @@ namespace filmotekaAPI.DTOs
             };
         }
 
-        public static new KorisnikServiceLoginDTO Error(string message)
+        public static new LoginResponseDTO Error(string message)
         {
             return new()
             {
