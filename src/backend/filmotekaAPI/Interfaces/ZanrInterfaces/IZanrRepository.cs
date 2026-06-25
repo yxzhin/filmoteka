@@ -6,7 +6,7 @@ namespace filmotekaAPI.Interfaces.ZanrInterfaces
     {
         new Task<Zanr?> GetById(int id);
         new Task<List<Zanr>> GetMany(int offset = 0, int limit = 10);
-        Task<Zanr?> GetByEmail(string email);
+        Task<Zanr?> GetByName(string name);
         new Task Save(Zanr entity);
         new Task Delete(Zanr entity);
     }
