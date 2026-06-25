@@ -1,15 +1,15 @@
 using filmotekaAPI.DTOs;
-using filmotekaAPI.Services;
+using filmotekaAPI.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace filmotekaAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController(KorisnikService korisnikService)
+    public class AuthController(IKorisnikService korisnikService)
         : ControllerBase
     {
-        private readonly KorisnikService _korisnikService = korisnikService;
+        private readonly IKorisnikService _korisnikService = korisnikService;
 
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterInputDTO registerInputDTO)

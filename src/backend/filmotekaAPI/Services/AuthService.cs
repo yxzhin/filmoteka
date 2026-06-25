@@ -1,3 +1,4 @@
+using filmotekaAPI.Interfaces;
 using filmotekaAPI.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace filmotekaAPI.Services
 {
-    public class AuthService(IConfiguration config)
+    public class AuthService(IConfiguration config) : IAuthService
     {
         private readonly IConfiguration _config = config;
 

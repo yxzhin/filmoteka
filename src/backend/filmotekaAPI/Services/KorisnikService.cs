@@ -1,17 +1,16 @@
 using filmotekaAPI.DTOs;
 using filmotekaAPI.Interfaces;
 using filmotekaAPI.Models;
-using filmotekaAPI.Repositories;
 
 namespace filmotekaAPI.Services
 {
     public class KorisnikService(
-        KorisnikRepository repository,
-        AuthService authService
+        IKorisnikRepository repository,
+        IAuthService authService
     ) : IKorisnikService
     {
-        private readonly KorisnikRepository _repository = repository;
-        private readonly AuthService _authService = authService;
+        private readonly IKorisnikRepository _repository = repository;
+        private readonly IAuthService _authService = authService;
 
         public async Task<KorisnikGetByIdResponseDTO> GetById(int id)
         {
