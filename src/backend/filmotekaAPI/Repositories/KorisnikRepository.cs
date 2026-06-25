@@ -11,7 +11,10 @@ namespace filmotekaAPI.Repositories
 
         public async Task<Korisnik?> GetById(int id)
         {
-            return await _dbContext.FindAsync<Korisnik>(id);
+            return await _dbContext.Korisnici
+                .Where(k => k.Id == id)
+                .AsNoTracking()
+                .SingleOrDefaultAsync();
         }
 
         public async Task<List<Korisnik>> GetMany(int offset = 0, int limit = 10)
@@ -24,34 +27,35 @@ namespace filmotekaAPI.Repositories
                 .ToListAsync();
         }
 
-        public async void Create(Korisnik entity)
+        public async Task<Korisnik?> GetByEmail(string email)
         {
-            if (await GetById(entity.Id) is null)
+            return await _dbContext.Korisnici
+                .Where(k => k.Email == email)
+                .AsNoTracking()
+                .SingleOrDefaultAsync();
+        }
+
+        public async Task Save(Korisnik entity)
+        {
+            if (await GetById(entity.Id) is not null)
             {
+                _ = _dbContext.Korisnici.Update(entity);
+                _ = await _dbContext.SaveChangesAsync();
                 return;
             }
             _ = _dbContext.Korisnici.Add(entity);
             _ = await _dbContext.SaveChangesAsync();
         }
 
-        public async void Update(Korisnik entity)
-        {
-            if (await GetById(entity.Id) is null)
-            {
-                return;
-            }
-            _ = _dbContext.Korisnici.Update(entity);
-            _ = await _dbContext.SaveChangesAsync();
-        }
-
-        public async void Delete(Korisnik entity)
+        public async Task Delete(Korisnik entity)
         {
             if (await GetById(entity.Id) is null)
             {
                 return;
             }
 
-            _ = await _dbContext.Korisnici.Where(k => k.Id == entity.Id)
+            _ = await _dbContext.Korisnici
+                .Where(k => k.Id == entity.Id)
                 .ExecuteDeleteAsync();
         }
     }
