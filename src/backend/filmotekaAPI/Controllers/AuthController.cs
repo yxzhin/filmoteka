@@ -1,4 +1,5 @@
 using filmotekaAPI.DTOs;
+using filmotekaAPI.DTOs.AuthDTOs;
 using filmotekaAPI.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

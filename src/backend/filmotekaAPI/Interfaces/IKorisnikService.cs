@@ -1,4 +1,6 @@
 using filmotekaAPI.DTOs;
+using filmotekaAPI.DTOs.AuthDTOs;
+using filmotekaAPI.DTOs.KorisnikDTOs;
 
 namespace filmotekaAPI.Interfaces
 {

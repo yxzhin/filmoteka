@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace filmotekaAPI.DTOs
+namespace filmotekaAPI.DTOs.AuthDTOs
 {
     public class RegisterInputDTO
     {

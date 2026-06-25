@@ -1,4 +1,6 @@
 using filmotekaAPI.DTOs;
+using filmotekaAPI.DTOs.AuthDTOs;
+using filmotekaAPI.DTOs.KorisnikDTOs;
 using filmotekaAPI.Interfaces;
 using filmotekaAPI.Models;
 

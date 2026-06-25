@@ -1,4 +1,4 @@
-namespace filmotekaAPI.DTOs
+namespace filmotekaAPI.DTOs.AuthDTOs
 {
     public class LoginResponseDTO : BaseResponseDTO
     {
