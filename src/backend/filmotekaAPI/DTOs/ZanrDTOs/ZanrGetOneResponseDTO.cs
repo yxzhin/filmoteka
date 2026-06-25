@@ -2,11 +2,11 @@ using filmotekaAPI.Models;
 
 namespace filmotekaAPI.DTOs.ZanrDTOs
 {
-    public class ZanrGetByIdResponseDTO : BaseResponseDTO
+    public class ZanrGetOneResponseDTO : BaseResponseDTO
     {
         public Zanr? Zanr { get; init; }
 
-        public static ZanrGetByIdResponseDTO Ok(Zanr zanr, string message)
+        public static ZanrGetOneResponseDTO Ok(Zanr zanr, string message)
         {
             return new()
             {
@@ -16,7 +16,7 @@ namespace filmotekaAPI.DTOs.ZanrDTOs
             };
         }
 
-        public static new ZanrGetByIdResponseDTO Error(string message)
+        public static new ZanrGetOneResponseDTO Error(string message)
         {
             return new()
             {
