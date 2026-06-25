@@ -4,8 +4,7 @@ namespace filmotekaAPI.Interfaces
     {
         Task<T?> GetById(int id);
         Task<List<T>> GetMany(int offset = 0, int limit = 10);
-        void Create(T entity);
-        void Update(T entity);
-        void Delete(T entity);
+        Task Save(T entity);
+        Task Delete(T entity);
     }
 }

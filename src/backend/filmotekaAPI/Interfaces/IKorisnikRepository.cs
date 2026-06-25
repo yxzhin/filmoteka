@@ -6,8 +6,8 @@ namespace filmotekaAPI.Interfaces
     {
         new Task<Korisnik?> GetById(int id);
         new Task<List<Korisnik>> GetMany(int offset = 0, int limit = 10);
-        new void Create(Korisnik entity);
-        new void Update(Korisnik entity);
-        new void Delete(Korisnik entity);
+        Task<Korisnik?> GetByEmail(string email);
+        new Task Save(Korisnik entity);
+        new Task Delete(Korisnik entity);
     }
 }
