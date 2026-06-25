@@ -1,5 +1,7 @@
 using filmotekaAPI.Data;
-using filmotekaAPI.Interfaces;
+using filmotekaAPI.Interfaces.AuthInterfaces;
+using filmotekaAPI.Interfaces.KorisnikInterfaces;
+using filmotekaAPI.Interfaces.ZanrInterfaces;
 using filmotekaAPI.Repositories;
 using filmotekaAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -26,7 +28,8 @@ builder.Services.AddScoped<IKorisnikRepository, KorisnikRepository>();
 builder.Services.AddScoped<IKorisnikService, KorisnikService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
-builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<IZanrRepository, ZanrRepository>();
+builder.Services.AddScoped<IZanrService, ZanrService>();
 
 builder.Services
     .AddAuthentication(

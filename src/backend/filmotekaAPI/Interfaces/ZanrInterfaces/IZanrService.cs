@@ -9,7 +9,7 @@ namespace filmotekaAPI.Interfaces.ZanrInterfaces
         Task<ZanrGetManyResponseDTO> GetMany(int offset = 0, int limit = 10);
         Task<ZanrGetOneResponseDTO> GetByName(string name);
         Task<BaseResponseDTO> Create(string name);
-        Task<BaseResponseDTO> Update(int id, string newName);
+        Task<BaseResponseDTO> Update(string OldName, string newName);
         Task<BaseResponseDTO> Delete(int id);
     }
 }

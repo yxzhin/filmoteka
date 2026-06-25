@@ -50,9 +50,9 @@ namespace filmotekaAPI.Services
             return BaseResponseDTO.Ok("zanr je uspesno kreiran");
         }
 
-        public async Task<BaseResponseDTO> Update(int id, string newName)
+        public async Task<BaseResponseDTO> Update(string OldName, string newName)
         {
-            Zanr? zanr = await _repository.GetById(id);
+            Zanr? zanr = await _repository.GetByName(OldName);
 
             if (zanr is null)
             {
