@@ -1,5 +1,5 @@
 using filmotekaAPI.Data;
-using filmotekaAPI.Interfaces;
+using filmotekaAPI.Interfaces.KorisnikInterfaces;
 using filmotekaAPI.Models;
 using Microsoft.EntityFrameworkCore;
 

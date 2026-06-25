@@ -1,6 +1,6 @@
 using filmotekaAPI.Models;
 
-namespace filmotekaAPI.Interfaces
+namespace filmotekaAPI.Interfaces.KorisnikInterfaces
 {
     public interface IKorisnikRepository : IRepository<Korisnik>
     {

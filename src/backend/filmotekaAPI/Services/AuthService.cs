@@ -1,4 +1,4 @@
-using filmotekaAPI.Interfaces;
+using filmotekaAPI.Interfaces.AuthInterfaces;
 using filmotekaAPI.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;

@@ -1,6 +1,6 @@
 using filmotekaAPI.Models;
 
-namespace filmotekaAPI.Interfaces
+namespace filmotekaAPI.Interfaces.AuthInterfaces
 {
     public interface IAuthService
     {

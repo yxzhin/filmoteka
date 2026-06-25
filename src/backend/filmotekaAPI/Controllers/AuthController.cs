@@ -1,6 +1,6 @@
 using filmotekaAPI.DTOs;
 using filmotekaAPI.DTOs.AuthDTOs;
-using filmotekaAPI.Interfaces;
+using filmotekaAPI.Interfaces.KorisnikInterfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace filmotekaAPI.Controllers

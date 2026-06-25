@@ -1,6 +1,6 @@
 using filmotekaAPI.Models;
 
-namespace filmotekaAPI.DTOs
+namespace filmotekaAPI.DTOs.KorisnikDTOs
 {
     public class KorisnikGetByIdResponseDTO : BaseResponseDTO
     {
