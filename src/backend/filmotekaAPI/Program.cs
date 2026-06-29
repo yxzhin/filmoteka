@@ -1,6 +1,7 @@
 using filmotekaAPI.Data;
 using filmotekaAPI.Interfaces.AuthInterfaces;
 using filmotekaAPI.Interfaces.KorisnikInterfaces;
+using filmotekaAPI.Interfaces.ReziserInterfaces;
 using filmotekaAPI.Interfaces.ZanrInterfaces;
 using filmotekaAPI.Repositories;
 using filmotekaAPI.Services;
@@ -30,6 +31,9 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddScoped<IZanrRepository, ZanrRepository>();
 builder.Services.AddScoped<IZanrService, ZanrService>();
+
+builder.Services.AddScoped<IReziserRepository, ReziserRepository>();
+builder.Services.AddScoped<IReziserService, ReziserService>();
 
 builder.Services
     .AddAuthentication(
