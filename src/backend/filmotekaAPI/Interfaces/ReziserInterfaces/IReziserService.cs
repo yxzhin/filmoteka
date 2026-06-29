@@ -8,7 +8,7 @@ namespace filmotekaAPI.Interfaces.ReziserInterfaces
         Task<ReziserGetOneResponseDTO> GetById(int id);
         Task<ReziserGetManyResponseDTO> GetMany(int offset = 0, int limit = 10);
         Task<ReziserGetOneResponseDTO> GetByName(string name);
-        Task<BaseResponseDTO> Create(string name);
+        Task<BaseResponseDTO> Create(ReziserCreateInputDTO reziserCreateInputDTO);
         Task<BaseResponseDTO> Update(ReziserUpdateInputDTO reziserUpdateInputDTO);
         Task<BaseResponseDTO> Delete(int id);
     }
