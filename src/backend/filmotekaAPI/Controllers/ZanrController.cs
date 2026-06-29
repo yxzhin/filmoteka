@@ -21,7 +21,7 @@ namespace filmotekaAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetMany([FromQuery] int offset, [FromQuery] int limit)
+        public async Task<IActionResult> GetMany([FromQuery] int offset = 0, [FromQuery] int limit = 10)
         {
             ZanrGetManyResponseDTO zanrGetManyResponseDTO = await _zanrService
                 .GetMany(offset, limit);
