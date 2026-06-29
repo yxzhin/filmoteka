@@ -23,5 +23,8 @@ namespace filmotekaAPI.Models
 
         [Required]
         public required int GodinaIzdanja { get; set; }
+
+        [Required]
+        public bool Dostupan { get; set; } = true;
     }
 }
