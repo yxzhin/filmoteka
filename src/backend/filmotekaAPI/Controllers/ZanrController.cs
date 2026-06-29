@@ -44,7 +44,7 @@ namespace filmotekaAPI.Controllers
                 return BadRequest(ModelState);
             }
             BaseResponseDTO zanrCreateResponseDTO = await _zanrService
-                .Create(zanrCreateInputDTO.Name);
+                .Create(zanrCreateInputDTO);
             return new JsonResult(zanrCreateResponseDTO);
         }
 

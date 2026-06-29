@@ -35,16 +35,16 @@ namespace filmotekaAPI.Services
                 : ZanrGetOneResponseDTO.Ok(zanr, "zanr je uspesno pronadjen");
         }
 
-        public async Task<BaseResponseDTO> Create(string name)
+        public async Task<BaseResponseDTO> Create(ZanrCreateInputDTO zanrCreateInputDTO)
         {
-            Zanr? zanr = await _repository.GetByName(name);
+            Zanr? zanr = await _repository.GetByName(zanrCreateInputDTO.Name);
 
             if (zanr is not null)
             {
                 return BaseResponseDTO.Error("zanr sa ovim nazivom vec postoji");
             }
 
-            zanr = new() { Naziv = name };
+            zanr = new() { Naziv = zanrCreateInputDTO.Name };
             await _repository.Save(zanr);
 
             return BaseResponseDTO.Ok("zanr je uspesno kreiran");
