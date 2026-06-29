@@ -5,7 +5,7 @@ namespace filmotekaAPI.DTOs.ZanrDTOs
     public class ZanrUpdateInputDTO
     {
         [Required]
-        public required string OldName { get; init; }
+        public required int Id { get; init; }
 
         [Required]
         [MaxLength(73)]
